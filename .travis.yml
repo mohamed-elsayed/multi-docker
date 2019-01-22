@@ -3,22 +3,22 @@ services:
   - docker
 
 before_install:
-  - docker build -t mohamedkandil/react-test -f ./client/Dockerfile.dev ./client 
+  - docker build -t kandel/react-test -f ./client/Dockerfile.dev ./client 
 
 
 script:
-  - docker run mohamedkandil/react-test npm test -- --coverage
+  - docker run kandel/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t mohamedkandil/multi-client ./client
-  - docker build -t mohamedkandil/multi-nginx ./nginx
-  - docker build -t mohamedkandil/multi-server ./server
-  - docker build -t mohamedkandil/multi-worker ./worker
+  - docker build -t kandel/multi-client ./client
+  - docker build -t kandel/multi-nginx ./nginx
+  - docker build -t kandel/multi-server ./server
+  - docker build -t kandel/multi-worker ./worker
   # log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   
   # Take those images and push them to docker hub
-  - docker push mohamedkandil/multi-client
-  - docker push mohamedkandil/multi-nginx
-  - docker push mohamedkandil/multi-server
-  - docker push mohamedkandil/multi-worker
+  - docker push kandel/multi-client
+  - docker push kandel/multi-nginx
+  - docker push kandel/multi-server
+  - docker push kandel/multi-worker
